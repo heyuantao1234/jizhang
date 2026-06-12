@@ -1,0 +1,9 @@
+{
+  "appId": "com.example.offlineaccounting",
+  "appName": "记账本",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "file"
+  }
+}
