@@ -1,0 +1,934 @@
+:root {
+  --primary: #4CAF50;
+  --primary-dark: #388E3C;
+  --deposit: #2196F3;
+  --withdraw: #F44336;
+  --positive: #4CAF50;
+  --zero: #999;
+  --bg: #f5f5f5;
+  --card-bg: #ffffff;
+  --text: #333333;
+  --text-secondary: #666666;
+  --border: #e0e0e0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding-bottom: 20px;
+}
+
+#app {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* 顶部导航 */
+.header {
+  background: var(--primary);
+  color: white;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header h1 {
+  font-size: 18px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-btn {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* 搜索栏 */
+.search-bar {
+  padding: 12px 16px;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 25px;
+  font-size: 15px;
+  background: var(--bg);
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* 快捷操作 */
+.quick-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.action-btn {
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.add-btn {
+  background: var(--primary);
+  color: white;
+}
+
+.list-btn {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* 统计概览 */
+.stats-overview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 16px;
+}
+
+.stat-card {
+  background: var(--card-bg);
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* 会员列表 */
+.members-section {
+  padding: 12px 16px;
+}
+
+.members-section h2 {
+  font-size: 15px;
+  margin-bottom: 12px;
+  color: var(--text-secondary);
+}
+
+.members-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 40px;
+  font-size: 14px;
+}
+
+.empty-state.small {
+  padding: 20px;
+  font-size: 13px;
+}
+
+/* 会员卡片 */
+.member-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.member-card.low-balance {
+  border: 2px solid var(--withdraw);
+}
+
+.alert-badge {
+  background: var(--withdraw);
+  color: white;
+  font-size: 12px;
+  padding: 4px 12px;
+  text-align: center;
+}
+
+.member-main {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  cursor: pointer;
+}
+
+.member-main:active {
+  background: var(--bg);
+}
+
+.member-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 600;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.member-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.member-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.member-phone {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.member-note {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.member-balance {
+  font-size: 20px;
+  font-weight: 700;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+
+.member-balance.positive {
+  color: var(--positive);
+}
+
+.member-balance.zero {
+  color: var(--zero);
+}
+
+.member-actions {
+  display: flex;
+  border-top: 1px solid var(--border);
+}
+
+.action-btn-small {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: var(--bg);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.action-btn-small:active {
+  opacity: 0.7;
+}
+
+.action-btn-small.deposit {
+  color: var(--deposit);
+}
+
+.action-btn-small.withdraw {
+  color: var(--withdraw);
+}
+
+.action-btn-small.delete {
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+.action-btn-small + .action-btn-small {
+  border-left: 1px solid var(--border);
+}
+
+/* 弹窗 */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background: var(--card-bg);
+  width: 100%;
+  max-width: 480px;
+  border-radius: 20px 20px 0 0;
+  padding: 20px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease;
+}
+
+.modal-content.small {
+  max-width: 320px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.modal-content.large {
+  max-width: 480px;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+}
+
+/* 表单 */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 16px;
+  background: var(--bg);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.submit-btn:active {
+  opacity: 0.9;
+}
+
+/* 快速编辑弹窗 */
+.quick-member-info {
+  background: var(--bg);
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.member-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+}
+
+.member-info-row .label {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.member-info-row .value {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.member-info-row .value.balance {
+  font-size: 20px;
+  color: var(--positive);
+}
+
+.quick-amount-section {
+  margin-bottom: 16px;
+}
+
+.quick-amount-btn {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.quick-amount {
+  padding: 14px 8px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: var(--card-bg);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.quick-amount:active {
+  background: var(--bg);
+}
+
+.custom-amount label {
+  display: block;
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.amount-input-group {
+  display: flex;
+  gap: 8px;
+}
+
+.type-btn {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 70px;
+}
+
+.type-btn.deposit {
+  background: var(--deposit);
+  color: white;
+}
+
+.type-btn.withdraw {
+  background: var(--withdraw);
+  color: white;
+}
+
+.amount-input-group input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.apply-btn {
+  padding: 12px 20px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.quick-note {
+  margin-bottom: 16px;
+}
+
+.quick-note label {
+  display: block;
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.quick-note input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 15px;
+  background: var(--bg);
+}
+
+/* 历史记录 */
+.history-section {
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+.history-section h4 {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px 12px;
+  background: var(--bg);
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.history-type {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-right: 8px;
+}
+
+.history-type.deposit {
+  background: rgba(33, 150, 243, 0.15);
+  color: var(--deposit);
+}
+
+.history-type.withdraw {
+  background: rgba(244, 67, 54, 0.15);
+  color: var(--withdraw);
+}
+
+.history-amount {
+  font-weight: 600;
+  margin-right: auto;
+}
+
+.history-amount.deposit {
+  color: var(--deposit);
+}
+
+.history-amount.withdraw {
+  color: var(--withdraw);
+}
+
+.history-date {
+  color: var(--text-secondary);
+  margin-left: 8px;
+}
+
+.history-note {
+  width: 100%;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* 会员详情弹窗 */
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  border-radius: 12px;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.detail-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.detail-info {
+  flex: 1;
+}
+
+.detail-name {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.detail-phone {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.detail-balance {
+  text-align: right;
+}
+
+.balance-label {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.balance-value {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.detail-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.detail-stat {
+  background: var(--bg);
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.detail-stat .stat-label {
+  display: block;
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.detail-stat .stat-value {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.detail-stat .stat-value.income {
+  color: var(--deposit);
+}
+
+.detail-stat .stat-value.expense {
+  color: var(--withdraw);
+}
+
+/* 交易记录列表 */
+.transaction-list {
+  max-height: 300px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: var(--bg);
+  border-radius: 10px;
+}
+
+.transaction-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.transaction-type {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.transaction-type.deposit {
+  color: var(--deposit);
+}
+
+.transaction-type.withdraw {
+  color: var(--withdraw);
+}
+
+.transaction-note {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.transaction-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.transaction-amount {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.transaction-amount.deposit {
+  color: var(--deposit);
+}
+
+.transaction-amount.withdraw {
+  color: var(--withdraw);
+}
+
+.transaction-balance {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.transaction-date {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* 二维码弹窗 */
+.member-card-display {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  border-radius: 12px;
+  padding: 20px;
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.card-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.card-phone {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 8px;
+}
+
+.card-balance {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.qrcode-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  margin-bottom: 16px;
+}
+
+.qrcode-container canvas {
+  border-radius: 8px;
+}
+
+.qr-fallback {
+  padding: 20px;
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+.qr-hint {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* 统计报表弹窗 */
+.stats-section {
+  margin-bottom: 20px;
+}
+
+.stats-section h4 {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.stats-item {
+  background: var(--bg);
+  padding: 12px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.stats-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.stats-value {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.stats-value.income {
+  color: var(--deposit);
+}
+
+.stats-value.expense {
+  color: var(--withdraw);
+}
+
+/* Top消费排行 */
+.top-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.top-spender-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  background: var(--bg);
+  border-radius: 8px;
+}
+
+.top-spender-item .rank {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  margin-right: 12px;
+}
+
+.top-spender-item .rank:nth-child(1) {
+  background: #FFD700;
+  color: #333;
+}
+
+.top-spender-item .name {
+  flex: 1;
+  font-size: 14px;
+}
+
+.top-spender-item .amount {
+  font-weight: 700;
+  color: var(--withdraw);
+}
+
+/* 删除弹窗 */
+.warning-text {
+  color: var(--withdraw);
+  font-size: 13px;
+  margin: 8px 0 16px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.modal-actions button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.delete-btn {
+  background: var(--withdraw);
+  color: white;
+}
